@@ -93,51 +93,58 @@ class Vehicle {
 // let v = new VehicleModule.Vehicle("Mecury", "Sedan", "1965", "color", "mileage");
 // console.log(v.make)
 
-let v = new Vehicle("Mecury", "Sedan", "1965", "color", "mileage");
-console.log(v.make)
+
 
 
 class Car extends Vehicle {
-    constructor(maximumPassengers, passenger, numberOfWheels, maximumSpeed, fuel, scheduleService) {
-        super();
-
-        this.maximumPassengers = maximumPassengers;
-        this.passenger = passenger;
-        this.numberOfWheels = numberOfWheels;
-        this.maximumSpeed = maximumSpeed;
-        this.fuel = fuel;
+    constructor(make, model, year, color, mileage) {
+        super(make, model, year, color, mileage);
+        this.maxPassengers = 6;
+        this.passenger = 0;
+        this.numberOfWheels = 4;
+        this.maxSpeed = 200;
+        this.fuel = 100;
         this.scheduleService = false;
-        this.availableRoom = false;
-        this.start = false;
+    }
 
+    start() {
+        if (this.fuel > 0) {            
+            console.log("engine has started.");
+        } else {
+            return this.started = false;
+            console.log("no fuel");
+        }
     }
 
     loadPassenger(num) {
-        if(this.passenger < this.maximumPassengers) {
-            this.availableRoom == true;
-            console.log("You can load " + (this.maximumPassengers - this.passenger) + " more passengers.")
+        if (this.passenger < this.maxPassengers) {
+            if ((num + this.passenger) <= this.maxPassengers) {
+                this.passenger = num;
+                return this.passenger;               
+            } else {
+                console.log(this.model + " " + this.make + " not have enough space to take all passengers.");
+
+            }
+        } else {
+            console.log(this.model + " " + this.make + " is full");
         }
     }
 
-    startCar() {
-        if(this.fuel > 0) {
-            this.start == true;
-            console.log("Car has started!")
-        }
-    }
-
-    scheduleMaintenance(mileage) {
-        if(mileage > 30000) {
-            this.scheduleService == true;
-            console.log("This car needs to be serviced!")
-        }
-    }
+    scheduleService(mileage) {
+        if (this.mileage > 30000) {            
+            this.scheduleService == true
+            return this.scheduleService;                       
+         }
 }
 
-let mercurySedan = new Car(6,0,4,200,100,false);
+
+// let v = new Vehicle("Mecury", "Sedan", "1965", "color", "mileage");
+// console.log(v.make)
+
+let mercurySedan = new Car("Mercury","A28",1980,"black",31000)
 console.log(mercurySedan);
-mercurySedan.loadPassenger()
+mercurySedan.loadPassenger(0)
 mercurySedan.startCar()
-mercurySedan.scheduleMaintenance(50000)
+mercurySedan.scheduleMaintenance()
 
 
